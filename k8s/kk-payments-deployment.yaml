@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kk-payments
-  namespace: kijani-staging
   labels:
     app: kk-payments
     project: kijanikiosk

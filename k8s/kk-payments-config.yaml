@@ -12,7 +12,7 @@ metadata:
     app: kk-payments
     project: kijanikiosk
   name: kk-payments-config
-  namespace: kijani-staging
+  
 
 
 

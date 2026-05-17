@@ -1,0 +1,37 @@
+---
+- name: Configure KijaniKiosk Kubernetes namespaces
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    staging_namespace: kijani-staging
+    production_namespace: kijani-project
+    configmap_name: kk-payments-config
+
+  tasks:
+    - name: Verify kijani-staging namespace exists
+      kubernetes.core.k8s_info:
+        kind: Namespace
+        name: "{{ staging_namespace }}"
+      register: staging_ns
+
+    - name: Verify kijani-project namespace exists
+      kubernetes.core.k8s_info:
+        kind: Namespace
+        name: "{{ production_namespace }}"
+      register: production_ns
+
+    - name: Confirm ConfigMap is present in staging
+      kubernetes.core.k8s_info:
+        kind: ConfigMap
+        name: "{{ configmap_name }}"
+        namespace: "{{ staging_namespace }}"
+      register: staging_configmap
+
+    - name: Confirm ConfigMap is present in production
+      kubernetes.core.k8s_info:
+        kind: ConfigMap
+        name: "{{ configmap_name }}"
+        namespace: "{{ production_namespace }}"
+      register: production_configmap

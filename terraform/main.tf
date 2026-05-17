@@ -23,3 +23,12 @@ resource "kubernetes_namespace" "kijani_staging" {
     }
   }
 }
+resource "kubernetes_namespace" "kijani_project" {
+  metadata {
+    name = "kijani-project"
+    labels = {
+      environment = "production"
+      managed-by  = "terraform"
+    }
+  }
+}
